@@ -12,14 +12,27 @@ Clone and add `"terminal",` to installed apps
 Set the urls
 
    ```python
-   url('^terminal/', include('terminal.urls')),
+   from instant.views import instant_auth
+   
+   urlpatterns = [
+      url('^terminal/', include('terminal.urls')),
+      url('^instant/', include('instant.urls')),
+   ]
    ```
 
- Go to `/terminal/`
+Create a `templates/instant/extra_clients.js` whith this content:
+
+   ```django
+   {% if user.is_superuser and request.path|slice:'9' == "/terminal" %}
+      {% include "terminal/client.js" %}
+   {% endif %}
+   ```
+
+Run the websockets server and go to `/terminal/`
  
- Type a command: `ping`
+Type a command: `ping`
  
- ## Create a command
+## Create a command
  
  Create a `terminal` folder in any app. Create a `commands.py` file inside this directory:
  

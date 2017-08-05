@@ -17,6 +17,7 @@ Set the urls
    urlpatterns = [
       url('^terminal/', include('terminal.urls')),
       url('^instant/', include('instant.urls')),
+      url('^centrifuge/auth/$', instant_auth, name='instant-auth'),
    ]
    ```
 

@@ -1,0 +1,44 @@
+input[name=command] {
+	border:0;
+	width:44em;
+	background-color:transparent;
+	color:var(--body-color);
+	display:inline-block;
+}
+.hidden {
+	display:none;
+}
+/* ##################################### Base tags ##################################### */
+body  {
+	font-family: monospace;
+	font-size:110%;
+	background-color:var(--body-bg-color);
+    margin: 0;
+    padding: 0; 
+}
+div, input {
+	box-sizing: border-box;
+	vertical-align:top;
+}
+/* ##################################### Skeleton ##################################### */
+#content {
+	padding:0.5em 1em 4em 1em;
+	text-align:center;
+	width:100%;
+}
+#output {
+	max-width:1200px;
+	color:var(--body-color);
+	text-align:left;
+}
+.blink {
+	animation: pulse 1s infinite;
+}
+@keyframes pulse {
+	0% {
+		opacity:0;
+	}
+	100% {
+		opacity:1;
+	}
+}

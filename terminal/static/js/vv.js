@@ -71,7 +71,9 @@ var vvMixin = {
 			});
 		},
 		postForm: function(url, data, action, error, token) {
-			var ax = axios.create({headers: {'X-CSRFToken': token}});
+			if (token !== null) {
+				var ax = axios.create({headers: {'X-CSRFToken': token}});
+			}
 			ax({
 				method: 'post',
 				url: url,

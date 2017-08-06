@@ -20,6 +20,13 @@ div, input {
 	box-sizing: border-box;
 	vertical-align:top;
 }
+b {
+	color:var(--bold-color);
+}
+em {
+	color:var(--emphasis-color);
+	font-style:normal;
+}
 /* ##################################### Skeleton ##################################### */
 #content {
 	padding:0.5em 1em 4em 1em;

@@ -8,6 +8,9 @@ const app = new Vue({
         	output: [],
         	lineNum: 0,
         	showInput: true,
+        	history: [],
+        	historyIndex: 0,
+        	commandline: "",
         }
 	},
 	methods: {
@@ -24,15 +27,19 @@ const app = new Vue({
 			this.cmd = this.getCmd();
 			if (this.cmd === "") {
 				this.output.push(">");
+				this.cmdEnd()
 				return
 			} else if (this.cmd === "clear") {
 				this.output = [];
+				this.cmdEnd()
 			} else if (this.cmd == "reload") {
 				window.location.reload();
 			} else {
 				this.output.push("> "+this.cmd);
 				this.postCmd();
 			}
+			this.history.push(this.cmd);
+			this.historyIndex = this.history.length-1;
 			this.clearInput();
 			this.lineNum++;
 		},
@@ -64,8 +71,34 @@ const app = new Vue({
 		clearInput: function() {
 			var input = this.get("command-input");
 			this.cmd = "";
+			this.commandline = "";
 			input.value = "";
 			input.focus();
 		},
 	},
 });
+
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+    e = e || window.event;
+    if (e.keyCode == '38') {
+    	e.preventDefault();  
+    	key = 0;
+    	if (app.historyIndex > 0) {
+    		key = app.historyIndex-1;
+    	}
+    	app.historyIndex = key;
+    	app.commandline = app.history[key]
+    }
+    else if (e.keyCode == '40') {
+    	e.preventDefault();  
+    	key = app.historyIndex.length-1;
+    	if (app.historyIndex < key) {
+    		key = app.historyIndex+1;
+    	}
+    	app.historyIndex = key;
+    	app.commandline = app.history[key]
+    }
+}
+

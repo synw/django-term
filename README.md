@@ -4,10 +4,19 @@ In browser terminal for Django that enables custom commands
 
 ## Install
 
-Dependency: [Django Instant](https://github.com/synw/django-instant) 
+Dependencies: 
+
+- [Django Instant](https://github.com/synw/django-instant) 
 for the websockets: [install doc](http://django-instant.readthedocs.io/en/latest/src/install.html)
 
-Clone and add `"terminal",` to installed apps
+- [Django Introspection](https://github.com/synw/django-introspection) for the basic commands
+
+Clone and add to installed apps:
+
+   ```
+   "introspection",
+   "terminal",
+   ```
 
 Set the urls
 
@@ -30,22 +39,25 @@ Create a `templates/instant/extra_clients.js` whith this content:
    ```
 
 Run the websockets server and go to `/terminal/`
+
+## Commands
  
-Type a command: `ping`
+`ping`: ping the server
+
+`inspect`: gives infos about an app or model. Params: `appname` or `appname.Modelname`: ex: `inspect auth.User`
  
 ## Create a command
  
  Create a `terminal` folder in any app. Create a `commands.py` file inside this directory:
  
    ```python
-   from terminal.commands import Command, rprint, endcmd
+   from terminal.commands import Command, rprint
   
-   def run_hello(cmd_args):
+   def run_hello(request, cmd_args):
       rprint("Hello world")
-      endcmd()
     
-   # Args are the command name and the runner function
-   c1 = Command("hello", run_hello)
+   # Args are the command name, the runner function and the help text
+   c1 = Command("hello", run_hello, "Hello world command")
    COMMANDS = [c1]
    ```
     

@@ -2,12 +2,11 @@ import json
 from django.views.generic.base import TemplateView, View
 from django.http.response import Http404
 from django.http import JsonResponse
+from django.conf import settings
 from terminal.apps import COMMANDS
-from django.shortcuts import redirect
 
 
 def get_command(name):
-    print(name, COMMANDS)
     for app in COMMANDS:
         cmds = COMMANDS[app]
         for cmd in cmds:
@@ -45,8 +44,10 @@ class PostCmdView(View):
         if numargs > 0:
             for arg in cargs:
                 argslist = argslist + " " + arg
-        print("=> Command", cmdname + argslist, "received")
-        err = cmd.run(cargs)
+        if settings.DEBUG is True:
+            print("=> Command", cmdname + argslist,
+                  "received from remote terminal")
+        err = cmd.run(request, cargs)
         if err is not None:
             return JsonResponse({"error": err})
         return JsonResponse({"ok": 1})

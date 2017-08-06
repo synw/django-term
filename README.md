@@ -21,6 +21,14 @@ Set the urls
    ]
    ```
 
+Add to settings.py:
+
+   ```python
+   SITE_SLUG = "mysite"
+   INSTANT_SUPERUSER_CHANNELS = ["$" + SITE_SLUG + "_command"]
+   ```
+
+
 Create a `templates/instant/extra_clients.js` whith this content:
 
    ```django

@@ -37,12 +37,18 @@ Create a `templates/instant/extra_clients.js` whith this content:
 Run the websockets server and go to `/terminal/`
 
 ## Commands
+
+Note: to use the commands from third-party apps your must have these apps installed
  
 `ping`: ping the server
 
 From [Django Introspection](https://github.com/synw/django-introspection):
 
 `inspect`: gives infos about an app or model. Params: `appname` or `appname.Modelname`: ex: `inspect auth.User`
+
+From [Django Dex](https://github.com/synw/django-dex):
+
+`replicatedb`: replicates the 'default' db into a sqlite 'replica' db
  
 ## Create a command
  

@@ -34,6 +34,8 @@ Run the websockets server and go to `/terminal/`
 ## Commands
 
 Note: to use the commands from third-party apps your must have these apps installed
+
+`help`: display info about the available commands
  
 `ping`: ping the server
 

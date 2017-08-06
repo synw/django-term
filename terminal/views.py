@@ -3,12 +3,13 @@ from django.views.generic.base import TemplateView, View
 from django.http.response import Http404
 from django.http import JsonResponse
 from django.conf import settings
-from terminal.apps import COMMANDS
+from terminal.apps import ALLCMDS
 
 
 def get_command(name):
-    for app in COMMANDS:
-        cmds = COMMANDS[app]
+    global ALLCMDS
+    for app in ALLCMDS:
+        cmds = ALLCMDS[app]
         for cmd in cmds:
             if cmd.name == name:
                 return cmd, app

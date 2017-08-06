@@ -1,7 +1,7 @@
 import importlib
 from django.apps import AppConfig
 
-COMMANDS = {}
+ALLCMDS = {}
 
 
 def loadcmds(modname):
@@ -19,13 +19,13 @@ class TerminalConfig(AppConfig):
     verbose_name = "Terminal"
 
     def ready(self):
-        global COMMANDS
+        global ALLCMDS
         from django.conf import settings
         apps = settings.INSTALLED_APPS
         cmds = {}
         for app in apps:
-            #print("APP --------------------", app)
             res = loadcmds(app)
             if res is not None:
                 cmds[app] = res
-        COMMANDS = cmds
+        ALLCMDS = cmds
+        print(ALLCMDS)

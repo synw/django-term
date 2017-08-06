@@ -4,12 +4,8 @@ In browser terminal for Django that enables custom commands
 
 ## Install
 
-Dependencies: 
-
-- [Django Instant](https://github.com/synw/django-instant) 
+Dependency: [Django Instant](https://github.com/synw/django-instant) 
 for the websockets: [install doc](http://django-instant.readthedocs.io/en/latest/src/install.html)
-
-- [Django Introspection](https://github.com/synw/django-introspection) for the basic commands
 
 Clone and add to installed apps:
 
@@ -43,6 +39,8 @@ Run the websockets server and go to `/terminal/`
 ## Commands
  
 `ping`: ping the server
+
+From [Django Introspection](https://github.com/synw/django-introspection):
 
 `inspect`: gives infos about an app or model. Params: `appname` or `appname.Modelname`: ex: `inspect auth.User`
  

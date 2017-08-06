@@ -7,12 +7,7 @@ In browser terminal for Django that enables custom commands
 Dependency: [Django Instant](https://github.com/synw/django-instant) 
 for the websockets: [install doc](http://django-instant.readthedocs.io/en/latest/src/install.html)
 
-Clone and add to installed apps:
-
-   ```
-   "introspection",
-   "terminal",
-   ```
+Clone and add `"terminal",` to installed apps:
 
 Set the urls
 

@@ -63,3 +63,7 @@ From [Django Dex](https://github.com/synw/django-dex):
    ```
     
 Your command will be detected at startup and enabled in the terminal
+
+## Customize the ui
+
+To customize the colors use the `terminal/colors.css` template

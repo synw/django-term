@@ -50,8 +50,6 @@ const app = new Vue({
 		},
 		runner: function(jobcmd) {
 			var cmd = this.cmd;
-			debug(cmd);
-			
 			if (cmd === "") {
 				this.output.push(">");
 				this.cmdEnd();
@@ -105,7 +103,6 @@ const app = new Vue({
 			}
 			var url = "{% url 'terminal-post' %}";
 			var token = data.csrfmiddlewaretoken;
-			debug(this.str(data));
 			this.postForm(url, data, action, error, token);
 		},
 		cmdEnd: function() {

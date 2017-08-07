@@ -3,4 +3,7 @@
 	--body-bg-color: black;
 	--bold-color: white;
 	--emphasis-color: lightgrey;
+	--warning-color: orange;
+	--error-color: red;
+	--success-color: green;
 }

@@ -1,7 +1,6 @@
 {% load terminal_tags %}
 var term_callbacks = {
 	"message": function(dataset) {
-		// the debug variable is set via INSTANT_DEBUG = True in settings.py
 		if (instantDebug === true) { console.log('EVENT: '+JSON.stringify(dataset));};
 		res = unpack_data(dataset);
 		var message = res['message'];
@@ -9,14 +8,17 @@ var term_callbacks = {
 		var message_label = res['message_label'];
 		var data = res['data'];
 		var channel = res['channel'];
-		if ( data.hasOwnProperty('my_field') ) {
-			my_field = data['myfield'];
-		}
-		if (event_class === "__command_end__") {
-			app.cmdEnd();
-		} else {
-			app.print(message);
-		}
+		if (event_class === "__job_start__") {
+			app.msg(message, 'jobstart');
+		} else if (event_class === "__job_end__") {
+			app.msg(message, "jobend");
+			this.cmdEnd();
+		} else if (event_class === "__command_warning__") {
+			app.msg(message, "warning");
+		} else if (event_class === "__command_error__") {
+			app.msg(message, "error");
+		} 
+		app.print(message);
 	},
 	{% include "instant/js/join_events.js" %}
 }

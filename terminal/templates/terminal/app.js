@@ -18,7 +18,7 @@ const app = new Vue({
         }
 	},
 	methods: {
-		print: function(msg) {
+		/*print: function(msg) {
 			if (this.pauseOutput === false) {
 				this.output.push(msg);
 			} else {
@@ -27,17 +27,19 @@ const app = new Vue({
 			}
 			this.lineNum++;
 			window.location.href = "#cmdline";
-		},
+		},*/
 		msg: function(cmd, mclass) {
-			var msg = "";
+			var msg = cmd;
 			if (mclass === "jobstart") {
 				msg = "Start working on job "+cmd
 			} else if (mclass === "jobend") {
 				msg = '[ <span class="succes">Ok</span> ] Job "'+cmd+'" is finished'
 			} else if (mclass === "warning") {
-				msg = '[ <span class="warning">Warning</span> ] from command '+cmd
+				msg = '[ <span class="warning">Warning</span> ] '+cmd
 			} else if (mclass === "error") {
-				msg = '[ <span class="error">Error</span> ] from command '+cmd
+				msg = '[ <span class="error">Error</span> ] '+cmd
+			} else if (mclass === "debug") {
+				msg = '[ <span class="debug">Debug</span> ] '+cmd
 			}
 			this.output.push(msg);
 		},
@@ -75,7 +77,6 @@ const app = new Vue({
 			this.history.push(cmd);
 			this.historyIndex = this.history.length-1;
 			this.lineNum++;
-			this.cmdEnd();
 		},
 		getCmd: function() {
 			var form = this.get("cmd-form");
@@ -89,8 +90,8 @@ const app = new Vue({
 			}
 			function action(response) {
 				if (response.data.hasOwnProperty("error") === true) {
-					app.msg("ERROR: "+response.data.error, "error");
-					app.cmdEnd();
+					app.msg(response.data.error, "error");
+					//app.cmdEnd();
 				}
 			}
 			var form = this.get("cmd-form");
@@ -106,8 +107,9 @@ const app = new Vue({
 			this.postForm(url, data, action, error, token);
 		},
 		cmdEnd: function() {
-			this.showInput = true;
+			window.scrollTo(0,document.body.scrollHeight);
 			this.clearInput();
+			this.showInput = true;
 			this.input.focus();
 		},
 		clearInput: function() {
@@ -124,12 +126,11 @@ const app = new Vue({
 		view: function(url) {
 			var h = document.body.scrollHeight;
 		},
+		debug: function(msg) {
+			app.msg(msg, "debug");
+		},
 	},
 });
-
-function debug(msg) {
-	app.output.push("[ Debug ] "+msg);
-}
 
 document.onkeydown = checkKey;
 

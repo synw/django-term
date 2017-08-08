@@ -36,6 +36,7 @@ class Command:
             if err is not None:
                 self.err(err)
                 return err
+            self.cmdend()
             return None
         except Exception as e:
             err = str(e)
@@ -49,6 +50,10 @@ class Command:
 
     def jobstart(self):
         publish(self.name, event_class="__job_start__",
+                channel=COMMAND_CHANNEL)
+
+    def cmdend(self):
+        publish(self.name, event_class="__command_end__",
                 channel=COMMAND_CHANNEL)
 
     def warning(self, err):

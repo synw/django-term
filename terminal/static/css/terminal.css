@@ -36,6 +36,9 @@ em {
 .error {
 	color: var(--error-color);
 }
+.debug {
+	color: var(--debug-color);
+}
 /* ##################################### Skeleton ##################################### */
 #content {
 	padding:0.5em 1em 4em 1em;

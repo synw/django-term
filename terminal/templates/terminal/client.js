@@ -17,8 +17,12 @@ var term_callbacks = {
 			app.msg(message, "warning");
 		} else if (event_class === "__command_error__") {
 			app.msg(message, "error");
-		} 
-		app.print(message);
+			app.cmdEnd();
+		} else if (event_class === "__command_end__") {
+			app.cmdEnd();
+		} else {
+			app.msg(message, null);
+		}
 	},
 	{% include "instant/js/join_events.js" %}
 }

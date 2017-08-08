@@ -3,6 +3,8 @@ from django.views.generic.base import TemplateView, View
 from django.http.response import Http404
 from django.http import JsonResponse
 from django.conf import settings
+from jobrunner.producers import runjob
+from terminal.commands import rprint
 from terminal.apps import ALLCMDS
 
 
@@ -32,16 +34,20 @@ class PostCmdView(View):
             return JsonResponse({})
         data = json.loads(self.request.body.decode('utf-8'))
         cmdname = data["command"]
-        print("CMD", cmdname)
-        isjob = data["isjob"]
+        jobid = data["jobid"]
+        print(cmdname, "/", jobid)
+        if (jobid != ""):
+            err = runjob(cmdname, jobid)
+            if err is not None:
+                rprint("Error posting the job", cmdname, "(", jobid, "):", err)
+                return JsonResponse({"error": err})
+            return JsonResponse({"ok": 1})
         cargs = []
         if " " in cmdname:
             s = cmdname.split(" ")
             print(s)
             cmdname = s[0]
             cargs = s[1:]
-        print("CMD name", cmdname)
-        print("CMD args", cargs)
         cmd, _ = get_command(cmdname)
         if cmd is None:
             return JsonResponse({"error": "Command " + cmdname + " not found"})
@@ -55,5 +61,6 @@ class PostCmdView(View):
                   "received from remote terminal")
         err = cmd.run(request, cargs)
         if err is not None:
+            rprint("Error running the command", cmdname + ":", err)
             return JsonResponse({"error": err})
         return JsonResponse({"ok": 1})

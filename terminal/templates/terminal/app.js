@@ -33,7 +33,7 @@ const app = new Vue({
 			if (mclass === "jobstart") {
 				msg = "Start working on job "+cmd
 			} else if (mclass === "jobend") {
-				msg = '[ <span class="succes">Ok</span> ] Job "'+cmd+'" is finished'
+				msg = '[ <span class="success">Ok</span> ] Job "'+cmd+'" is finished'
 			} else if (mclass === "warning") {
 				msg = '[ <span class="warning">Warning</span> ] '+cmd
 			} else if (mclass === "error") {
@@ -41,6 +41,7 @@ const app = new Vue({
 			} else if (mclass === "debug") {
 				msg = '[ <span class="debug">Debug</span> ] '+cmd
 			}
+			this.scrollDown();
 			this.output.push(msg);
 		},
 		dispatch: function() {
@@ -63,13 +64,15 @@ const app = new Vue({
 				this.cmdEnd();
 				return
 			} else if (cmd === "reload") {
+				this.msg("BYE, reloading ...", "success")
 				window.location.reload();
+				return
 			} else if (cmd === "chart") {
 				this.chartCmd();
 			} else {
-				isjob = false;
+				jobcmd = false;
 				if (cmd.startsWith("job ")) {
-					isjob = true;
+					jobcmd = cmd;
 				}
 				this.output.push("> "+cmd);
 				this.postCmd(jobcmd);
@@ -97,20 +100,23 @@ const app = new Vue({
 			var form = this.get("cmd-form");
 			var data = {};
 			var data = this.serializeForm(form);
-			data["isjob"] = false;
+			data["jobid"] = "";
 			if (jobcmd !== false) {
 				data.command = jobcmd;
-				data.isjob = true;
+				data.jobid = getId();
 			}
 			var url = "{% url 'terminal-post' %}";
 			var token = data.csrfmiddlewaretoken;
 			this.postForm(url, data, action, error, token);
 		},
 		cmdEnd: function() {
-			window.scrollTo(0,document.body.scrollHeight);
+			this.scrollDown();
 			this.clearInput();
 			this.showInput = true;
 			this.input.focus();
+		},
+		scrollDown: function() {
+			window.scrollTo(0,document.body.scrollHeight);
 		},
 		clearInput: function() {
 			this.cmd = "";
@@ -163,5 +169,17 @@ function checkKey(e) {
     	app.cmd = res;
     	app.dispatchJob();
     }
+}
+
+function getId () { // Public Domain/MIT
+    var d = new Date().getTime();
+    if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+        d += performance.now(); //use high-precision timer if available
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
 }
 

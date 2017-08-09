@@ -39,6 +39,9 @@ em {
 .debug {
 	color: var(--debug-color);
 }
+.event {
+	color: var(--events-color);
+}
 /* ##################################### Skeleton ##################################### */
 #content {
 	padding:0.5em 1em 4em 1em;

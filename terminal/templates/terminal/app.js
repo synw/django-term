@@ -28,18 +28,20 @@ const app = new Vue({
 			this.lineNum++;
 			window.location.href = "#cmdline";
 		},*/
-		msg: function(cmd, mclass) {
+		msg: function(cmd, mclass, extra) {
 			var msg = cmd;
 			if (mclass === "jobstart") {
 				msg = "Start working on job "+cmd
 			} else if (mclass === "jobend") {
-				msg = '[ <span class="success">Ok</span> ] Job "'+cmd+'" is finished'
+				msg = '[<span class="success">Ok</span>] Job "'+cmd+'" is finished'
 			} else if (mclass === "warning") {
-				msg = '[ <span class="warning">Warning</span> ] '+cmd
+				msg = '[<span class="warning">Warning</span>] '+cmd
 			} else if (mclass === "error") {
-				msg = '[ <span class="error">Error</span> ] '+cmd
+				msg = '[<span class="error">Error</span>] '+cmd
 			} else if (mclass === "debug") {
-				msg = '[ <span class="debug">Debug</span> ] '+cmd
+				msg = '[<span class="debug">Debug</span>] '+cmd
+			} else if (mclass === "event") {
+				msg = '[<span class="event">'+extra+'</span> event] '+cmd
 			}
 			this.scrollDown();
 			this.output.push(msg);

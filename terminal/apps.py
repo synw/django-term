@@ -28,3 +28,4 @@ class TerminalConfig(AppConfig):
             if res is not None:
                 cmds[app] = res
         ALLCMDS = cmds
+        print(ALLCMDS)

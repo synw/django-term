@@ -27,21 +27,6 @@ em {
 	color:var(--emphasis-color);
 	font-style:normal;
 }
-.success {
-	color: var(--success-color);
-}
-.warning {
-	color: var(--warning-color);
-}
-.error {
-	color: var(--error-color);
-}
-.debug {
-	color: var(--debug-color);
-}
-.event {
-	color: var(--events-color);
-}
 /* ##################################### Skeleton ##################################### */
 #content {
 	padding:0.5em 1em 4em 1em;
@@ -52,14 +37,6 @@ em {
 	max-width:1200px;
 	color:var(--body-color);
 	text-align:left;
-}
-#viewer {
-	width:100%;
-	height:22em;
-	border:1px solid red;
-	background-color:grey;
-	color:lime;
-
 }
 .blink {
 	animation: pulse 1s infinite;

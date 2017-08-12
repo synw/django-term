@@ -19,18 +19,11 @@
 				<form id="cmd-form" method="post" onsubmit="return false" style="float:left">{% csrf_token %}
 					<label for="command" style="float:left" v-show="showInput" v-model="cmd">>&nbsp;</label>
 					<a name="cmdline"></a>
-					<input id="command-input" 
-							style="float:left" 
-							type="text" 
-							name="command" 
-							v-model="commandline" 
-							v-on:keyup.enter="dispatch" 
-							autofocus />
+					<input id="command-input" style="float:left" type="text" name="command" v-model="commandline" v-on:keyup.enter="dispatch" autofocus />
 				</form>
 			</div>
 		</div>
 	</div>
-	<iframe id="viewer" v-show="viewMode"></iframe>
 	<script type="text/javascript">
 		{% include "terminal/app.js" %}
 	</script>

@@ -1,5 +1,5 @@
 from django import template
-from dex.conf import COMMAND_CHANNEL
+from terminal.conf import COMMAND_CHANNEL
 
 register = template.Library()
 

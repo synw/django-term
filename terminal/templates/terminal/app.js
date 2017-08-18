@@ -14,6 +14,9 @@ const app = new Vue({
         }
 	},
 	methods: {
+		msg: function(msg) {
+			this.print(msg)
+		},
 		print: function(msg) {
 			this.output.push(msg);
 			this.lineNum++;
@@ -50,7 +53,8 @@ const app = new Vue({
 		},
 		postCmd: function() {
 			function error(err) {
-				app.output.push("NETWORK ERROR", err)
+				app.output.push("NETWORK ERROR : can not reach "+err.config.url+" using "+err.config.method+" method");
+				app.cmdEnd()
 			}
 			function action(response) {
 				if (response.data.hasOwnProperty("error") === true) {

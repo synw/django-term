@@ -72,6 +72,14 @@ From [Django Dex](https://github.com/synw/django-dex):
     
 Your command will be detected at startup and enabled in the terminal
 
+### Apps that have terminal commands:
+
+[django-introspection](https://github.com/synw/django-introspection): get infos about Django objects
+
+[django-dex](https://github.com/synw/django-dex): database export tools
+
+[django-jobrunner](https://github.com/synw/django-jobrunner): experimental asynchronous jobs runner
+
 ## Customize the ui
 
 To customize the colors use the `terminal/colors.css` template

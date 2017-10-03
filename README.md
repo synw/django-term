@@ -86,4 +86,4 @@ To customize the colors use the `terminal/colors.css` template
 
 ## Screenshot
 
-![Terminal](https://github.com/synw/django-terminal/blob/docs/img/screenshot.png)
+![Terminal](https://github.com/synw/django-terminal/blob/master/docs/img/screenshot.png)

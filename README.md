@@ -83,3 +83,7 @@ Your command will be detected at startup and enabled in the terminal
 ## Customize the ui
 
 To customize the colors use the `terminal/colors.css` template
+
+## Screenshot
+
+![Terminal](https://github.com/synw/django-terminal/blob/docs/img/screenshot.png)

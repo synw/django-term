@@ -17,7 +17,7 @@ def loadcmds(modname):
 
 
 class TermConfig(AppConfig):
-    name = 'terminal'
+    name = 'term'
     verbose_name = "Terminal"
 
     def ready(self):

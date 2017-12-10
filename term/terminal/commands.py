@@ -1,8 +1,8 @@
-from terminal.commands import Command, rprint
+from term.commands import Command, rprint
 
 
 def thelp(request, cmd_args):
-    from terminal.apps import ALLCMDS
+    from term.apps import ALLCMDS
 
     for appname in ALLCMDS:
         cmds = ALLCMDS[appname]

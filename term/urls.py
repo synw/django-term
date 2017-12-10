@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from terminal.views import TermView, PostCmdView
+from term.views import TermView, PostCmdView
 
 
 urlpatterns = [

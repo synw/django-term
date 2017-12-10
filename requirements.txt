@@ -1,2 +1,2 @@
 django-instant>=0.6
-blessings
+goerr

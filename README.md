@@ -1,4 +1,4 @@
-# Django Terminal
+# Django Term
 
 In browser terminal for Django that enables custom commands
 
@@ -8,10 +8,10 @@ Dependency: [Django Instant](https://github.com/synw/django-instant)
 for the websockets: [install doc](http://django-instant.readthedocs.io/en/latest/src/install.html)
 
    ```
-   pip install django-terminal
+   pip install django-term
    ```
 
-Add `"terminal",` to installed apps:
+Add `"term",` to installed apps:
 
 Set the urls
 
@@ -19,7 +19,7 @@ Set the urls
    from instant.views import instant_auth
    
    urlpatterns = [
-      url('^terminal/', include('terminal.urls')),
+      url('^terminal/', include('term.urls')),
       url('^instant/', include('instant.urls')),
       url('^centrifuge/auth/$', instant_auth, name='instant-auth'),
    ]
@@ -37,7 +37,7 @@ Create a `templates/instant/extra_clients.js` whith this content:
 
    ```django
    {% if user.is_superuser and request.path|slice:'9' == "/terminal" %}
-      {% include "terminal/client.js" %}
+      {% include "term/client.js" %}
    {% endif %}
    ```
 

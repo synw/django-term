@@ -1,5 +1,5 @@
 from django import template
-from terminal.conf import COMMAND_CHANNEL
+from term.conf import COMMAND_CHANNEL
 
 register = template.Library()
 

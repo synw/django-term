@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView, View
 from django.http.response import Http404
 from django.http import JsonResponse
 from django.conf import settings
-from terminal.apps import ALLCMDS
+from term.apps import ALLCMDS
 
 
 def get_command(name):
@@ -17,7 +17,7 @@ def get_command(name):
 
 
 class TermView(TemplateView):
-    template_name = 'terminal/index.html'
+    template_name = 'term/index.html'
 
     def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_superuser:

@@ -1,0 +1,5 @@
+recursive-include terminal/static *
+recursive-include terminal/templates *
+recursive-include terminal/migrations *
+recursive-include terminal/templatetags *
+recursive-include terminal/terminal *

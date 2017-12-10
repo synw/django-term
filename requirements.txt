@@ -1,0 +1,1 @@
+django-instant>=0.6

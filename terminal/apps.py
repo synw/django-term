@@ -12,6 +12,8 @@ def loadcmds(modname):
         return cmds
     except ImportError:
         pass
+    except Exception as e:
+        raise(e)
 
 
 class TerminalConfig(AppConfig):

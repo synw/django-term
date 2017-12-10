@@ -1,4 +1,5 @@
 import json
+from goerr import err
 from django.views.generic.base import TemplateView, View
 from django.http.response import Http404
 from django.http import JsonResponse
@@ -7,7 +8,6 @@ from terminal.apps import ALLCMDS
 
 
 def get_command(name):
-    global ALLCMDS
     for app in ALLCMDS:
         cmds = ALLCMDS[app]
         for cmd in cmds:
@@ -48,7 +48,7 @@ class PostCmdView(View):
         if settings.DEBUG is True:
             print("=> Command", cmdname + argslist,
                   "received from remote terminal")
-        err = cmd.run(request, cargs)
-        if err is not None:
+        cmd.run(request, cargs)
+        if err.exists:
             return JsonResponse({"error": err})
         return JsonResponse({"ok": 1})

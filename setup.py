@@ -1,18 +1,18 @@
 from setuptools import setup, find_packages
 
 
-version = __import__('terminal').__version__
+version = __import__('term').__version__
 
 setup(
-    name='django-terminal',
+    name='django-term',
     packages=find_packages(),
     include_package_data=True,
     version=version,
-    description='In browser terminal for Django ',
+    description='In browser term for Django ',
     author='synw',
     author_email='synwe@yahoo.com',
-    url='https://github.com/synw/django-terminal',
-    download_url='https://github.com/synw/django-terminal/releases/tag/' + version,
+    url='https://github.com/synw/django-term',
+    download_url='https://github.com/synw/django-term/releases/tag/' + version,
     keywords=['django', 'terminal'],
     classifiers=[
         'Development Status :: 3 - Alpha',

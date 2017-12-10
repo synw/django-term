@@ -16,7 +16,7 @@ def loadcmds(modname):
         raise(e)
 
 
-class TerminalConfig(AppConfig):
+class TermConfig(AppConfig):
     name = 'terminal'
     verbose_name = "Terminal"
 

@@ -23,6 +23,7 @@ setup(
     ],
     install_requires=[
         'django-instant>=0.6',
+        "blessings",
     ],
     zip_safe=False
 )

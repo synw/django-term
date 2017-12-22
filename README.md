@@ -29,7 +29,9 @@ Add to settings.py:
 
    ```python
    SITE_SLUG = "mysite"
-   INSTANT_SUPERUSER_CHANNELS = ("$" + SITE_SLUG + "_terminal",)
+   INSTANT_SUPERUSER_CHANNELS = (
+       ("$" + SITE_SLUG + "_terminal",),
+   )
    ```
 
 

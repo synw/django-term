@@ -66,7 +66,7 @@ From [Django Dex](https://github.com/synw/django-dex):
  Create a `terminal` folder in any app. Create a `commands.py` file inside this directory:
  
    ```python
-   from terminal.commands import Command, rprint
+   from term.commands import Command, rprint
   
    def run_hello(request, cmd_args):
       rprint("Hello world")

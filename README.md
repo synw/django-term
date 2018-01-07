@@ -29,18 +29,16 @@ Add to settings.py:
 
    ```python
    SITE_SLUG = "mysite"
-   INSTANT_SUPERUSER_CHANNELS = (
-       ("$" + SITE_SLUG + "_terminal",),
-   )
+   INSTANT_SUPERUSER_CHANNELS = [
+    ["$" + SITE_SLUG + "_terminal", ["/terminal"]]
+   ]
    ```
 
 
-Create a `templates/instant/extra_clients.js` whith this content:
+Create a `templates/instant/handlers/$mysite_terminal.js` whith this content:
 
    ```django
-   {% if user.is_superuser and request.path|slice:'9' == "/terminal" %}
-      {% include "term/client.js" %}
-   {% endif %}
+   {% include "term/handlers.js" %}
    ```
 
 Run the websockets server and go to `/terminal/`
@@ -52,6 +50,8 @@ Note: to use the commands from third-party apps your must have these apps instal
 `help`: display info about the available commands
  
 `ping`: ping the server
+
+`clear`: clears the screen
 
 From [Django Introspection](https://github.com/synw/django-introspection):
 

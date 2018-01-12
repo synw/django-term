@@ -30,3 +30,6 @@ class TermConfig(AppConfig):
             if res is not None:
                 cmds[app] = res
         ALLCMDS = cmds
+        if settings.INSTANT_DEBUG == True:
+            print("Django Term: found commands:")
+            print(str(ALLCMDS))

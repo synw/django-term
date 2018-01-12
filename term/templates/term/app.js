@@ -5,20 +5,33 @@ const app = new Vue({
     data () {
         return {
         	cmd: "",
+        	async_cmd: false,
         	output: [],
         	lineNum: 0,
         	showInput: true,
         	history: [],
         	historyIndex: 0,
         	commandline: "",
+        	pauseOutput: false,
         }
 	},
 	methods: {
 		msg: function(msg) {
 			this.print(msg)
 		},
-		print: function(msg) {
+		/*print: function(msg) {
 			this.output.push(msg);
+			this.lineNum++;
+			window.location.href = "#cmdline";
+		},*/
+		print: function(msg) {
+			if (this.pauseOutput === false) {
+				this.output.push(msg);
+			} else {
+				var input = this.get("command-input");
+				input.focus();
+				//this.pausedOutput.push(msg);
+			}
 			this.lineNum++;
 			window.location.href = "#cmdline";
 		},
@@ -27,7 +40,9 @@ const app = new Vue({
 		},
 		dispatch: function() {
 			this.startCmd();
-			this.cmd = this.getCmd();
+			if (this.async_cmd === false) {
+				this.cmd = this.getCmd();
+			}
 			if (this.cmd === "") {
 				this.output.push(">");
 				this.cmdEnd()
@@ -63,18 +78,24 @@ const app = new Vue({
 				}
 			}
 			var form = this.get("cmd-form");
-			var data = this.serializeForm(form);
+			var formdata = this.serializeForm(form);
+			var token = formdata.csrfmiddlewaretoken;
+			if (this.async_cmd === false) {
+				var data = formdata;
+			} else {
+				var data = {"csrfmiddlewaretoken": token, "command": this.cmd};
+			}
 			var url = "{% url 'terminal-post' %}";
-			var token = data.csrfmiddlewaretoken;
 			this.postForm(url, data, action, error, token);
 		},
 		cmdEnd: function() {
 			this.showInput = true;
+			this.cmd = "";
+			this.async_cmd = false;
 			this.clearInput();
 		},
 		clearInput: function() {
 			var input = this.get("command-input");
-			this.cmd = "";
 			this.commandline = "";
 			input.value = "";
 			input.focus();
@@ -94,8 +115,7 @@ function checkKey(e) {
     	}
     	app.historyIndex = key;
     	app.commandline = app.history[key]
-    }
-    else if (e.keyCode == '40') {
+    } else if (e.keyCode == '40') {
     	e.preventDefault();  
     	key = app.historyIndex.length-1;
     	if (app.historyIndex < key) {
@@ -103,6 +123,17 @@ function checkKey(e) {
     	}
     	app.historyIndex = key;
     	app.commandline = app.history[key]
+    } else if (e.keyCode == '87' && e.altKey) {
+    	if (app.pauseOutput) {
+    		app.pauseOutput = false;
+    		return
+    	}
+    	app.pauseOutput = true;
+    } else if (e.keyCode == '67' && e.altKey) {
+    	var res = prompt("Command", "help");
+    	app.cmd = res;
+    	app.async_cmd = true;
+    	app.dispatch();
     }
 }
 

@@ -50,5 +50,7 @@ class PostCmdView(View):
                   "received from remote terminal")
         cmd.run(request, cargs)
         if err.exists:
-            return JsonResponse({"error": err.to_json()})
+            errmsg = err.to_html(reset=True)
+            err.reset()
+            return JsonResponse({"error": errmsg})
         return JsonResponse({"ok": 1})

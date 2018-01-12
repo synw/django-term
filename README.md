@@ -78,6 +78,8 @@ From [Django Dex](https://github.com/synw/django-dex):
     
 Your command will be detected at startup and enabled in the terminal
 
+To debug a command during developement use ` TERM_DEBUG_MODEL = "mymodel"`
+
 ### Apps that have terminal commands:
 
 [django-introspection](https://github.com/synw/django-introspection): get infos about Django objects
